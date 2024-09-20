@@ -1,5 +1,12 @@
 import random
 increment = (1-0.006)/17
+#%% md
+# Standard Banner
+
+Formula to simulate extracting a standard character
+#%%
+
+
 def random_c():
 
     i=1
@@ -13,3 +20,154 @@ def random_c():
         else:
 
             i+=1
+
+#%% md
+# Limited Character Banner
+
+Formula to simulate extracting a limited character
+#%%
+def featured_c():
+
+    n = random_c()
+
+    if random.choice([0,1])==0:
+
+        return n
+
+    else:
+
+        return n + random_c()
+
+print(featured_c())
+#%% md
+# Weapon Banner
+
+
+Formula to find a random weapon
+#%%
+increment = 0.07
+
+def random_wc():
+
+    i=1
+
+    while True:
+
+        if random.random()<=0.006+increment*max(i-64,0):
+
+            return i
+
+        else:
+
+            i+=1
+
+#%% md
+# Limited Weapon Banner
+
+Formula to find a limited weapon
+#%%
+def featured_wc():
+
+    n=random_wc()
+
+    iterations=0
+
+    weights_list = [
+    [37.5, 62.5],  # First iteration weights
+    [50, 50],      # Second iteration weights
+    [100, 0]       # Third iteration weights
+    ]
+
+    while iterations<3:
+
+        weights = weights_list[iterations]
+
+        if random.choices(population=[0,1],weights=weights)==[0]:
+
+            return n
+        else:
+
+            iterations+=1
+
+            n+=random_wc()
+
+    return n
+
+#%%
+
+results_rcf=0
+
+results_cf=0
+
+results_rwf=0
+
+results_wf=0
+
+
+for _ in range(1000000):
+    results_rcf+= random_c()
+    results_cf+= featured_c()
+    results_rwf+= random_wc()
+    results_wf+= featured_wc()
+
+
+# Calculate the average result
+
+#%%
+average_result_rcf = results_rcf/ 999999
+average_result_cf = results_cf/ 999999
+average_result_rwf = results_rwf/ 999999
+average_result_wf = results_wf/ 999999
+
+print(average_result_wf)
+print(average_result_rcf)
+print(average_result_cf)
+print(average_result_rwf)
+#%%
+pool=["Qiqi","Dehya","Diluc","Jean","Keqing","Tighnari","Mona","Primordial Jade Spear","Lost Prayer","Wolf Gravestone","Amos Bow","Aquila Favonia","S Pride","S Atlas","S Harp","S Spine","S Blade"]
+print(pool[7:])
+#%%
+def randomc():
+
+    i=1
+
+    drop=None
+
+    while True:
+
+        if random.random()<=0.006+increment*max(i-74,0):
+
+            if random.choice([0,1])==0:
+
+                drop=random.choice(pool[:7])
+
+            else:
+
+                drop=random.choice(pool[7:])
+
+            return drop,i
+
+        else:
+
+            i+=1
+#%%
+def specific(who):
+
+    i=0
+
+    while True:
+        drop, attempts = randomc()  # Call randomc and get drop
+        i += attempts  # Add attempts from randomc to total attempts
+
+        if drop == who:  # Check if the drop matches the target item
+            return i  # Return total attempts once the target is found
+#%%
+results_sc=0
+results_sw=0
+for _ in range(100000):
+    results_sc+=specific("Dehya")
+    results_sw+=specific("S Blade")
+
+#%%
+print(results_sc/99999)
+print(results_sw/99999)
