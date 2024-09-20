@@ -3,7 +3,7 @@ increment = (1-0.006)/17
 #%% md
 # Standard Banner
 
-Formula to simulate extracting a standard character
+Number of rounds needed to find the first 5*star in the standard and Limited Character banner.
 #%%
 
 
@@ -24,7 +24,7 @@ def random_c():
 #%% md
 # Limited Character Banner
 
-Formula to simulate extracting a limited character
+Number of rounds needed to find the limited 5*star in the Limited Character banner.
 #%%
 def featured_c():
 
@@ -42,8 +42,7 @@ print(featured_c())
 #%% md
 # Weapon Banner
 
-
-Formula to find a random weapon
+Number of rounds needed to find the first 5*star in the Limited Weapon banner.
 #%%
 increment = 0.07
 
@@ -64,7 +63,7 @@ def random_wc():
 #%% md
 # Limited Weapon Banner
 
-Formula to find a limited weapon
+Number of rounds needed to find the limited 5*star in the Limited Weapon banner.
 #%%
 def featured_wc():
 
@@ -118,11 +117,11 @@ average_result_rcf = results_rcf/ 999999
 average_result_cf = results_cf/ 999999
 average_result_rwf = results_rwf/ 999999
 average_result_wf = results_wf/ 999999
+#%%
+#%% md
+#Probabilities of the Standard Banner
 
-print(average_result_wf)
-print(average_result_rcf)
-print(average_result_cf)
-print(average_result_rwf)
+Sets of standard 5*star items
 #%%
 pool=["Qiqi","Dehya","Diluc","Jean","Keqing","Tighnari","Mona","Primordial Jade Spear","Lost Prayer","Wolf Gravestone","Amos Bow","Aquila Favonia","S Pride","S Atlas","S Harp","S Spine","S Blade"]
 print(pool[7:])
@@ -150,6 +149,8 @@ def randomc():
         else:
 
             i+=1
+#%% md
+Number of rounds to get a specific standard character or weapon in the standard banner
 #%%
 def specific(who):
 
